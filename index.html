@@ -1,301 +1,69 @@
-﻿<!DOCTYPE html>
-<html lang="en" class="984335569">
-<head>
-  <meta charset="UTF-8">
-  <title>DJ WILMER</title>
-  <link rel="stylesheet" href="./style.css">
+<script>
+const stream = "https://stream.zeno.fm/7mk2bzwy5x8uv.aac";
+const idzeno = "7mk2bzwy5x8uv";
 
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-<html lang="es">
+// Reproductor
+const audio = new Audio(stream);
+window.onload = () => audio.play();
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DJ WILMER EN VIVO</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="manifest" href="/manifest.json">
-  <meta name="theme-color" content="#FFA447">
-  <link rel="apple-touch-icon" href="/icons/icon-192.png">
-  <style>
-    body {
-      background-image: url('https://i.ibb.co/jkp1z3Ww/fondo-png.png');
-      background-size: cover;
-      background-position: center;
-    }
-
-    .transition-all {
-      transition: all 0.3s ease;
-    }
-
-    .hover\:scale-110:hover {
-      transform: scale(1.1);
-    }
-
-    .hover\:brightness-110:hover {
-      filter: brightness(1.1);
-    }
-
-    .btn-effect:hover {
-      transform: scale(1.1);
-      filter: brightness(1.2);
-    }
-
-    @keyframes marquee {
-      0% {
-        transform: translateX(100%);
-      }
-
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-
-    .animate-marquee {
-      animation: marquee 140s linear infinite;
-    }
-
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      top: 0;
-      left: 0;
-    }
-  </style>
-</head>
-
-<body class="text-white flex flex-col items-center justify-center min-h-screen relative overflow-x-hidden">
-
-  <div id="particles-js"></div> <!-- Partículas de fondo -->
-
-  <div class="absolute top-4 right-4 z-50">
-    <button id="menuBtn" class="text-white text-2xl focus:outline-none hover:scale-110 transition-all">
-      <i class="fas fa-bars"></i>
-    </button>
-  </div>
-
-  <div class="absolute top-4 left-4 z-30">
-    <button id="shareBtn" class="w-16 h-16 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg text-2xl flex items-center justify-center focus:outline-none transition-all">
-      <i class="fas fa-share-alt"></i>
-    </button>
-  </div>
-
-  <div id="installContainer" class="absolute bottom-4 right-4 z-50"></div>
-
-  <div id="menuPanel" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 z-40 shadow-lg p-6 space-y-4">
-    <h2 class="text-xl font-semibold mb-4">Redes Sociales</h2>
-    <a href=" https://web.facebook.com/DJCHOCHOBARWILMER" target="_blank" class="flex items-center space-x-2 text-white bg-[#1877F2] hover:bg-[#145dbf] px-4 py-2 rounded btn-effect">
-      <i class="fab fa-facebook"></i><span>Facebook</span>
-    </a>
-    <a href=" https://x.com/Dj_Wilmer_Peru" target="_blank" class="flex items-center space-x-2 text-white bg-[#1DA1F2] hover:bg-[#0d8ddb] px-4 py-2 rounded btn-effect">
-      <i class="fab fa-twitter"></i><span>Twitter</span>
-    </a>
-    <a href=" https://www.instagram.com/wilmerdelgadocieza" target="_blank" class="flex items-center space-x-2 text-white bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:brightness-110 px-4 py-2 rounded btn-effect">
-      <i class="fab fa-instagram"></i><span>Instagram</span>
-    </a>
-    <a href=" https://www.youtube.com/DJCHOCHOBARWILMER" target="_blank" class="flex items-center space-x-2 text-white bg-[#FF0000] hover:bg-[#cc0000] px-4 py-2 rounded btn-effect">
-      <i class="fab fa-youtube"></i><span>YouTube</span>
-    </a>
-    <a href=" https://www.tiktok.com/@djchochobarwilmer" target="_blank" class="flex items-center space-x-2 text-white bg-[#000000] hover:bg-[#1c1c1c] px-4 py-2 rounded btn-effect">
-      <i class="fab fa-tiktok"></i><span>TikTok</span>
-    </a>
-    <a href=" https://wilmerdelgadocieza.blogspot.com" target="_blank" class="flex items-center space-x-2 text-white bg-[#0070ba] hover:bg-[#005ea6] px-4 py-2 rounded btn-effect">
-      <i class="fab fa-paypal"></i><span>PAYPAL</span>
-    </a>
-    <a href="https://wilmerdelgadocieza.blogspot.com/" target="_blank" class="flex items-center space-x-2 text-white bg-[#FF0000] hover:bg-[#cc0000] px-4 py-2 rounded btn-effect">
-      <i class="fas fa-tv"></i><span>TV En Vivo</span>
-    </a>
-    <a class='flex items-center space-x-2 text-white bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 hover:brightness-110 px-4 py-2 rounded btn-effect' href='/programacion' target='_blank'>
-      <i class="fas fa-calendar-alt"></i><span>Programación</span>
-    </a>
-  </div>
-
-  <div class="mt-2 mb-6">
-    <img src=" https://i.ibb.co/mhw9LGh/DJ-WILMER-PNG-ORIGINAL.png
-" alt="Logo Radio" class="w-80 h-80 object-contain rounded-full shadow-lg">
-  </div>
-
-  <div class="text-center mb-4">
-    <h3 id="songTitle" class="text-xl font-semibold mb-2"></h3>
-    <p id="songArtist" class="text-lg mb-6"></p>
-  </div>
-
-  <div class="w-11/12 mb-6">
-    <label for="volumeSlider" class="block text-center mb-2"></label>
-    <div class="flex justify-between items-center">
-      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" class="w-full accent-[#FFA447] h-8">
-      <span id="volumeLabel" class="ml-4 text-lg">0%</span>
-    </div>
-  </div>
-
-  <button id="playBtn" class="w-16 h-16 bg-[#FFA447] hover:bg-[#FFA447] text-white rounded-full shadow-lg text-2xl flex items-center justify-center focus:outline-none transition-all">
-    <i class="fas fa-play"></i>
-  </button>
-
-  <audio id="audio" src="https://stream.zeno.fm/wttrxavefwzuv"></audio>
-
-  <div class="absolute bottom-0 w-full bg-gray-800 overflow-hidden">
-    <div id="newsContent" class="whitespace-nowrap animate-marquee py-2 px-4 text-sm text-yellow-400 flex gap-x-6"></div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS("particles-js", {
-      particles: {
-        number: {
-          value: 50
-        },
-        color: {
-          value: "#ffffff"
-        },
-        shape: {
-          type: "circle"
-        },
-        opacity: {
-          value: 0.5
-        },
-        size: {
-          value: 3
-        },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: "#ffffff",
-          opacity: 0.4,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 3
-        }
-      },
-      interactivity: {
-        detect_on: "canvas",
-        events: {
-          onhover: {
-            enable: true,
-            mode: "repulse"
-          },
-          onclick: {
-            enable: true,
-            mode: "push"
-          }
-        },
-        modes: {
-          repulse: {
-            distance: 100
-          },
-          push: {
-            particles_nb: 4
-          }
-        }
-      },
-      retina_detect: true
-    });
-  </script>
-
-  <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const menuPanel = document.getElementById('menuPanel');
-    const playBtn = document.getElementById('playBtn');
-    const audio = document.getElementById('audio');
-    const volumeSlider = document.getElementById('volumeSlider');
-    const shareBtn = document.getElementById('shareBtn');
-    const volumeLabel = document.getElementById('volumeLabel');
-    const songTitle = document.getElementById('songTitle');
-    const songArtist = document.getElementById('songArtist');
-    let isPlaying = false;
-    async function fetchSongInfo() {
-      try {
-        const response = await fetch(`https://api.zeno.fm/mounts/metadata/subscribe/wke4ravefwzuv ?ra=${Math.random()}`);
-        const data = await response.json();
-        if (data && data.title) {
-          songTitle.textContent = data.title || "Dj Wilmer en vivo";
-          songArtist.textContent = data.artist || "DJ WILMER EN VIVO";
-        }
-      } catch (error) {
-        console.error('Error al obtener la canción:', error);
-      }
-    }
-    setInterval(fetchSongInfo, 20000);
-    fetchSongInfo();
-    const savedVolume = localStorage.getItem('radioVolume');
-    if (savedVolume !== null) {
-      audio.volume = parseFloat(savedVolume);
-      volumeSlider.value = savedVolume;
-      volumeLabel.textContent = `${Math.round(savedVolume * 100)}%`;
-    }
-    menuBtn.addEventListener('click', () => {
-      menuPanel.classList.toggle('-translate-x-full');
-      menuPanel.classList.toggle('translate-x-0');
-    });
-    playBtn.addEventListener('click', () => {
-      if (!isPlaying) {
+const PLAYPAUSE = () => {
+    if (audio.paused) {
         audio.load();
         audio.play();
-        playBtn.innerHTML = '<i class="fas fa-stop"></i>';
-      } else {
+    } else {
         audio.pause();
-        playBtn.innerHTML = '<i class="fas fa-play"></i>';
-      }
-      isPlaying = !isPlaying;
-    });
-    volumeSlider.addEventListener('input', () => {
-      audio.volume = volumeSlider.value;
-      volumeLabel.textContent = `${Math.round(volumeSlider.value * 100)}%`;
-      localStorage.setItem('radioVolume', volumeSlider.value);
-    });
-    shareBtn.addEventListener('click', () => {
-      if (navigator.share) {
-        navigator.share({
-          title: 'Dj Wilmer En Vivo',
-          text: '¡Escucha nuestra radio en vivo y comparte con tus amigos!',
-          url: window.location.href
-        }).catch(console.error);
-      } else {
-        alert('Funcionalidad de compartir no soportada');
-      }
-    });
-    async function fetchRSS() {
-      // Evita que la pantalla se apague
-      if (window.plugins && window.plugins.insomnia) {
-        window.plugins.insomnia.keepAwake();
-      }
-      const rssUrls = [
-        'https://rpp.pe/noticias/rss',
-        'https://www.excelsior.com.mx/rss.xml',
-        'https://rpp.pe/tecno/rss/portada.xml'
-      ];
-      const newsContent = document.getElementById('newsContent');
-      async function loadNewsFromUrl(url) {
-        try {
-          const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`);
-          const data = await response.json();
-          if (data.items && data.items.length > 0) {
-            newsContent.innerHTML = data.items.map(item => `<span class="mx-6">${item.title}</span>`).join(' ');
-          }
-        } catch (error) {
-          console.error('Error al cargar las noticias:', error);
-        }
-      }
-      while (true) {
-        for (const url of rssUrls) {
-          await loadNewsFromUrl(url);
-        }
-        await new Promise(resolve => setTimeout(resolve, 120000));
-      }
     }
-    fetchRSS();
-  </script>
-</body>
+};
 
-</html>
-<!-- partial -->
-  
-</body>
-</html>
+audio.onplay = () => $(".loading, .eq, .play").addClass("on");
+audio.onpause = () => $(".loading, .eq, .play").removeClass("on");
+audio.onerror = () => alert("Error Radio Aventura estamos resolviendo.");
+$("#volume").on("input", function () {
+    audio.volume = this.value / 100;
+});
+
+// Metadata y Cover
+let songNow = "";
+function fetchMetadata() {
+    $.getJSON(
+        `https://zenoplay.zenomedia.com/api/zenofm/nowplaying/${idzeno}?ra=${Math.random()}`,
+        (data) => {
+            const currentSong = data.title || "Error de Api - revise los datos";
+            if (currentSong === songNow) return;
+            songNow = currentSong;
+
+            // Separar artista y canción
+            const [artist, song] = currentSong.split(" - ");
+            $(".artist").text(artist || "Artista desconocido");
+            $(".song").text(song || "Canción desconocida");
+            document.title = currentSong;
+
+            // Obtener portada desde iTunes
+            $.getJSON(
+                `https://itunes.apple.com/search?term=${artist.replace(
+                    /\W+/g,
+                    "+"
+                )}&media=music&limit=1`,
+                (coverData) => {
+                    const image =
+                        coverData.results[0]?.artworkUrl100.replace(
+                            "100x100bb",
+                            "600x600bb"
+                        ) || "img/default.jpg";
+
+                    $(".images").html(
+                        `<img src="${image}" class="lazyload" alt="${currentSong}" />`
+                    );
+
+                    $(".bg").html(
+                        `<img src="${image}" class="lazyload" alt="" />`
+                    );
+                }
+            );
+        }
+    );
+}
+
+fetchMetadata();
+setInterval(fetchMetadata, 5000);
+</script>
