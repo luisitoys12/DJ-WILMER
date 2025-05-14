@@ -89,6 +89,12 @@
 
     setInterval(fetchMetadata, 5000);
     fetchMetadata();
+    const menuBtn = document.getElementById('menuBtn');
+const menuPanel = document.getElementById('menuPanel');
+
+menuBtn.addEventListener('click', () => {
+    menuPanel.classList.toggle('-translate-x-full');
+});
   </script>
 
 </body>
