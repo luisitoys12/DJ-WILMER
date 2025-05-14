@@ -9010,15 +9010,6 @@ button:hover {
     100% { text-shadow: 0 0 20px #3a86ff; }
 }
 
-/* Divisiones con borde neón */
-div {
-    border: 3px solid;
-    border-image: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff) 1;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 10px;
-}
-
 /* Texto con animación de color */
 h1, h2, h3, h4, h5, h6, p {
     animation: text-glow 3s infinite alternate;
