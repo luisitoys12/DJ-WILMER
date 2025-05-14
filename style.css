@@ -8968,3 +8968,64 @@
     u+f0ec, u+f10a-f10b, u+f123, u+f13e, u+f148-f149, u+f14c, u+f156, u+f15e,
     u+f160-f161, u+f163, u+f175-f178, u+f195, u+f1f8, u+f219, u+f27a;
 }
+/* Fondo animado con gradiente */
+body {
+    background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff, #ffbe0b, #fb5607);
+    background-size: 500% 500%;
+    animation: disco-background 10s infinite;
+    color: #fff; /* Asegúrate de que el texto sea legible */
+}
+
+/* Animación para fondo */
+@keyframes disco-background {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Botones estilo disco */
+button {
+    background: linear-gradient(90deg, #8338ec, #ff006e, #fb5607);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ffbe0b, 0 0 30px #8338ec;
+}
+
+/* Iconos con parpadeo */
+.fa {
+    animation: flash-animation 1.5s infinite alternate;
+}
+
+@keyframes flash-animation {
+    0% { text-shadow: 0 0 10px #ff006e; }
+    100% { text-shadow: 0 0 20px #3a86ff; }
+}
+
+/* Divisiones con borde neón */
+div {
+    border: 3px solid;
+    border-image: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff) 1;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+}
+
+/* Texto con animación de color */
+h1, h2, h3, h4, h5, h6, p {
+    animation: text-glow 3s infinite alternate;
+}
+
+@keyframes text-glow {
+    0% { color: #ff006e; }
+    50% { color: #ffbe0b; }
+    100% { color: #3a86ff; }
+}
