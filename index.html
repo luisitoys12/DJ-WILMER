@@ -153,7 +153,12 @@ menuBtn.addEventListener('click', () => {
   const volumeSlider = document.getElementById('volumeSlider');
   const volumeLabel = document.getElementById('volumeLabel');
 
-  // Inicializar el volumen al 100% al cargar la página
+document.addEventListener('DOMContentLoaded', () => {
+  const audio = document.getElementById('audio');
+  const volumeSlider = document.getElementById('volumeSlider');
+  const volumeLabel = document.getElementById('volumeLabel');
+
+  // Inicializar el volumen al 100%
   audio.volume = 1; // Volumen inicial al 100%
   volumeSlider.value = 1; // Control deslizante al máximo
   volumeLabel.textContent = '100%'; // Texto del volumen inicial
@@ -163,6 +168,8 @@ menuBtn.addEventListener('click', () => {
     const volume = parseFloat(volumeSlider.value);
     audio.volume = volume; // Actualizar el volumen del audio
     volumeLabel.textContent = `${Math.round(volume * 100)}%`; // Actualizar el texto del volumen
+  });
+});
   });
 </script>
 </body>
