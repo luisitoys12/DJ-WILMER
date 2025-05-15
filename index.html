@@ -1,13 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" class="984335569">
-<head>
-  <meta charset="UTF-8">
-  <title>DJ WILMER</title>
-  <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -25,11 +16,46 @@
       background-size: cover;
       background-position: center;
     }
+
+    /* Estilos para el pop-up modal */
+    #bullyingModal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      background-color: white;
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    #modalOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+    #closeModalBtn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
   </style>
 </head>
 
 <body class="text-white flex flex-col items-center justify-center min-h-screen relative overflow-x-hidden">
-
   <div id="particles-js"></div>
   <div class="absolute top-4 right-4 z-50">
     <button id="menuBtn" class="text-white text-2xl focus:outline-none hover:scale-110 transition-all">
@@ -37,64 +63,30 @@
     </button>
   </div>
 
- <div id="menuPanel" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 z-40 shadow-lg p-6 space-y-4">
-  <h2 class="text-xl font-semibold mb-4">Redes Sociales</h2>
-  <a href="https://web.facebook.com/DJCHOCHOBARWILMER" target="_blank" class="flex items-center space-x-2 text-white bg-[#1877F2] hover:bg-[#145dbf] px-4 py-2 rounded btn-effect">
-    <i class="fab fa-facebook"></i><span>Facebook</span>
-  </a>
-  <!-- Nuevos enlaces -->
-  <a href="https://tusitioweb.com" target="_blank" class="flex items-center space-x-2 text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded">
-    <i class="fas fa-link"></i><span>Sitio Web</span>
-  </a>
-  <a href="https://linkbio.com" target="_blank" class="flex items-center space-x-2 text-white bg-green-500 hover:bg-green-700 px-4 py-2 rounded">
-    <i class="fas fa-link"></i><span>Linkbio</span>
-  </a>
-  <a href="https://vacantes.com" target="_blank" class="flex items-center space-x-2 text-white bg-orange-500 hover:bg-orange-700 px-4 py-2 rounded">
-    <i class="fas fa-briefcase"></i><span>Vacantes</span>
-  </a>
-  <button id="bullyingBtn" class="flex items-center space-x-2 text-white bg-red-500 hover:bg-red-700 px-4 py-2 rounded">
-    <i class="fas fa-exclamation-circle"></i><span>No Más Bullying</span>
-  </button>
-</div>
-
-<div id="modalOverlay"></div>
-<div id="bullyingModal">
-  <h2 class="text-xl font-bold mb-4">No Más Bullying</h2>
-  <p class="mb-4">
-    El bullying es un comportamiento agresivo e intencional que se repite en el tiempo. Puede causar daño físico o emocional. 
-    Actúa de inmediato si eres testigo o víctima:
-  </p>
-  <ul class="list-disc list-inside mb-4">
-    <li>Habla con un adulto de confianza.</li>
-    <li>Muestra apoyo a la persona afectada.</li>
-    <li>No participes ni permitas el bullying.</li>
-  </ul>
-  <button id="closeModalBtn" class="bg-red-500 text-white px-4 py-2 rounded">Cerrar</button>
-</div>
-
-<script>
-  const bullyingBtn = document.getElementById('bullyingBtn');
-  const bullyingModal = document.getElementById('bullyingModal');
-  const modalOverlay = document.getElementById('modalOverlay');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-
-  bullyingBtn.addEventListener('click', () => {
-    bullyingModal.style.display = 'block';
-    modalOverlay.style.display = 'block';
-  });
-
-  closeModalBtn.addEventListener('click', () => {
-    bullyingModal.style.display = 'none';
-    modalOverlay.style.display = 'none';
-  });
-
-  modalOverlay.addEventListener('click', () => {
-    bullyingModal.style.display = 'none';
-    modalOverlay.style.display = 'none';
-  });
-</script>
+  <div id="menuPanel" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 z-40 shadow-lg p-6 space-y-4">
+    <h2 class="text-xl font-semibold mb-4">Redes Sociales</h2>
+    <a href="https://web.facebook.com/DJCHOCHOBARWILMER" target="_blank" class="flex items-center space-x-2 text-white bg-[#1877F2] hover:bg-[#145dbf] px-4 py-2 rounded btn-effect">
+      <i class="fab fa-facebook"></i><span>Facebook</span>
     </a>
-    <!-- Más enlaces aquí -->
+    <!-- Botón para mostrar el pop-up de Bullying -->
+    <button id="bullyingBtn" class="flex items-center space-x-2 text-white bg-red-500 hover:bg-red-700 px-4 py-2 rounded">
+      <i class="fas fa-exclamation-circle"></i><span>No Más Bullying</span>
+    </button>
+  </div>
+
+  <div id="modalOverlay"></div>
+  <div id="bullyingModal">
+    <button id="closeModalBtn">&times;</button>
+    <h2 class="text-xl font-bold mb-4">No Más Bullying</h2>
+    <p class="mb-4">
+      El bullying es un comportamiento agresivo e intencional que se repite en el tiempo. Puede causar daño físico o emocional.
+      Actúa de inmediato si eres testigo o víctima:
+    </p>
+    <ul class="list-disc list-inside mb-4">
+      <li>Habla con un adulto de confianza.</li>
+      <li>Muestra apoyo a la persona afectada.</li>
+      <li>No participes ni permitas el bullying.</li>
+    </ul>
   </div>
 
   <div class="mt-2 mb-6">
@@ -106,14 +98,6 @@
     <p id="songArtist" class="text-lg mb-6"></p>
   </div>
 
-  <div class="w-11/12 mb-6">
-    <label for="volumeSlider" class="block text-center mb-2"></label>
-    <div class="flex justify-between items-center">
-      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" class="w-full accent-[#FFA447] h-8">
-      <span id="volumeLabel" class="ml-4 text-lg">0%</span>
-    </div>
-  </div>
-
   <button id="playBtn" class="w-16 h-16 bg-[#FFA447] hover:bg-[#FFA447] text-white rounded-full shadow-lg text-2xl flex items-center justify-center focus:outline-none transition-all">
     <i class="fas fa-play"></i>
   </button>
@@ -121,56 +105,47 @@
   <audio id="audio" src="https://stream.zeno.fm/wttrxavefwzuv"></audio>
 
   <script>
-    const audio = document.getElementById('audio');
-    const songTitle = document.getElementById('songTitle');
-    const songArtist = document.getElementById('songArtist');
-
-    async function fetchMetadata() {
-      try {
-        const response = await fetch(`https://zenoplay.zenomedia.com/api/zenofm/nowplaying/wttrxavefwzuv?ra=${Math.random()}`);
-        const data = await response.json();
-        if (data.title) {
-          const [artist, song] = data.title.split(' - ');
-          songTitle.textContent = song || "Sin título";
-          songArtist.textContent = artist || "Desconocido";
-        }
-      } catch (error) {
-        console.error('Error al obtener metadatos:', error);
-      }
-    }
-
-    setInterval(fetchMetadata, 5000);
-    fetchMetadata();
+    // Manejar el botón de menú
     const menuBtn = document.getElementById('menuBtn');
-const menuPanel = document.getElementById('menuPanel');
+    const menuPanel = document.getElementById('menuPanel');
+    menuBtn.addEventListener('click', () => {
+      menuPanel.classList.toggle('-translate-x-full');
+    });
 
-menuBtn.addEventListener('click', () => {
-    menuPanel.classList.toggle('-translate-x-full');
-});
+    // Mostrar y ocultar el pop-up de Bullying
+    const bullyingBtn = document.getElementById('bullyingBtn');
+    const bullyingModal = document.getElementById('bullyingModal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+
+    bullyingBtn.addEventListener('click', () => {
+      bullyingModal.style.display = 'block';
+      modalOverlay.style.display = 'block';
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      bullyingModal.style.display = 'none';
+      modalOverlay.style.display = 'none';
+    });
+
+    modalOverlay.addEventListener('click', () => {
+      bullyingModal.style.display = 'none';
+      modalOverlay.style.display = 'none';
+    });
+
+    // Botón de reproducción
+    const audio = document.getElementById('audio');
+    const playBtn = document.getElementById('playBtn');
+    playBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      } else {
+        audio.pause();
+        playBtn.innerHTML = '<i class="fas fa-play"></i>';
+      }
+    });
   </script>
-<script>
-  const audio = document.getElementById('audio');
-  const volumeSlider = document.getElementById('volumeSlider');
-  const volumeLabel = document.getElementById('volumeLabel');
-
-document.addEventListener('DOMContentLoaded', () => {
-  const audio = document.getElementById('audio');
-  const volumeSlider = document.getElementById('volumeSlider');
-  const volumeLabel = document.getElementById('volumeLabel');
-
-  // Inicializar el volumen al 100%
-  audio.volume = 1; // Volumen inicial al 100%
-  volumeSlider.value = 1; // Control deslizante al máximo
-  volumeLabel.textContent = '100%'; // Texto del volumen inicial
-
-  // Evento para actualizar el volumen al mover el control deslizante
-  volumeSlider.addEventListener('input', () => {
-    const volume = parseFloat(volumeSlider.value);
-    audio.volume = volume; // Actualizar el volumen del audio
-    volumeLabel.textContent = `${Math.round(volume * 100)}%`; // Actualizar el texto del volumen
-  });
-});
-  });
-</script>
 </body>
+
 </html>
