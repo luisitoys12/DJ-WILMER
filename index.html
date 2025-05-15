@@ -37,10 +37,62 @@
     </button>
   </div>
 
-  <div id="menuPanel" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 z-40 shadow-lg p-6 space-y-4">
-    <h2 class="text-xl font-semibold mb-4">Redes Sociales</h2>
-    <a href="https://web.facebook.com/DJCHOCHOBARWILMER" target="_blank" class="flex items-center space-x-2 text-white bg-[#1877F2] hover:bg-[#145dbf] px-4 py-2 rounded btn-effect">
-      <i class="fab fa-facebook"></i><span>Facebook</span>
+ <div id="menuPanel" class="fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 z-40 shadow-lg p-6 space-y-4">
+  <h2 class="text-xl font-semibold mb-4">Redes Sociales</h2>
+  <a href="https://web.facebook.com/DJCHOCHOBARWILMER" target="_blank" class="flex items-center space-x-2 text-white bg-[#1877F2] hover:bg-[#145dbf] px-4 py-2 rounded btn-effect">
+    <i class="fab fa-facebook"></i><span>Facebook</span>
+  </a>
+  <!-- Nuevos enlaces -->
+  <a href="https://tusitioweb.com" target="_blank" class="flex items-center space-x-2 text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded">
+    <i class="fas fa-link"></i><span>Sitio Web</span>
+  </a>
+  <a href="https://linkbio.com" target="_blank" class="flex items-center space-x-2 text-white bg-green-500 hover:bg-green-700 px-4 py-2 rounded">
+    <i class="fas fa-link"></i><span>Linkbio</span>
+  </a>
+  <a href="https://vacantes.com" target="_blank" class="flex items-center space-x-2 text-white bg-orange-500 hover:bg-orange-700 px-4 py-2 rounded">
+    <i class="fas fa-briefcase"></i><span>Vacantes</span>
+  </a>
+  <button id="bullyingBtn" class="flex items-center space-x-2 text-white bg-red-500 hover:bg-red-700 px-4 py-2 rounded">
+    <i class="fas fa-exclamation-circle"></i><span>No Más Bullying</span>
+  </button>
+</div>
+
+<div id="modalOverlay"></div>
+<div id="bullyingModal">
+  <h2 class="text-xl font-bold mb-4">No Más Bullying</h2>
+  <p class="mb-4">
+    El bullying es un comportamiento agresivo e intencional que se repite en el tiempo. Puede causar daño físico o emocional. 
+    Actúa de inmediato si eres testigo o víctima:
+  </p>
+  <ul class="list-disc list-inside mb-4">
+    <li>Habla con un adulto de confianza.</li>
+    <li>Muestra apoyo a la persona afectada.</li>
+    <li>No participes ni permitas el bullying.</li>
+  </ul>
+  <button id="closeModalBtn" class="bg-red-500 text-white px-4 py-2 rounded">Cerrar</button>
+</div>
+
+<script>
+  const bullyingBtn = document.getElementById('bullyingBtn');
+  const bullyingModal = document.getElementById('bullyingModal');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+
+  bullyingBtn.addEventListener('click', () => {
+    bullyingModal.style.display = 'block';
+    modalOverlay.style.display = 'block';
+  });
+
+  closeModalBtn.addEventListener('click', () => {
+    bullyingModal.style.display = 'none';
+    modalOverlay.style.display = 'none';
+  });
+
+  modalOverlay.addEventListener('click', () => {
+    bullyingModal.style.display = 'none';
+    modalOverlay.style.display = 'none';
+  });
+</script>
     </a>
     <!-- Más enlaces aquí -->
   </div>
@@ -96,6 +148,22 @@ menuBtn.addEventListener('click', () => {
     menuPanel.classList.toggle('-translate-x-full');
 });
   </script>
+<script>
+  const audio = document.getElementById('audio');
+  const volumeSlider = document.getElementById('volumeSlider');
+  const volumeLabel = document.getElementById('volumeLabel');
 
+  // Inicializar el volumen al 100% al cargar la página
+  audio.volume = 1; // Volumen inicial al 100%
+  volumeSlider.value = 1; // Control deslizante al máximo
+  volumeLabel.textContent = '100%'; // Texto del volumen inicial
+
+  // Evento para actualizar el volumen al mover el control deslizante
+  volumeSlider.addEventListener('input', () => {
+    const volume = parseFloat(volumeSlider.value);
+    audio.volume = volume; // Actualizar el volumen del audio
+    volumeLabel.textContent = `${Math.round(volume * 100)}%`; // Actualizar el texto del volumen
+  });
+</script>
 </body>
 </html>
