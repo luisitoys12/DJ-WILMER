@@ -9020,3 +9020,24 @@ h1, h2, h3, h4, h5, h6, p {
     50% { color: #ffbe0b; }
     100% { color: #3a86ff; }
 }
+/* Estilos para el footer */
+footer {
+  background-color: #2d3748; /* Gris oscuro */
+  color: #f7fafc; /* Blanco */
+  text-align: center;
+  padding: 1rem 0; /* Espaciado superior e inferior */
+  font-size: 0.9rem; /* Tamaño de texto */
+}
+
+footer p {
+  margin: 0.5rem 0; /* Margen entre líneas de texto */
+}
+
+footer p a {
+  color: #ffa447; /* Naranja */
+  text-decoration: none; /* Sin subrayado */
+}
+
+footer p a:hover {
+  text-decoration: underline; /* Subrayado al pasar el ratón */
+}
