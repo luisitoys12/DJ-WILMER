@@ -83,61 +83,30 @@
     </button>
   </div>
 
- <div id="modalOverlay"></div>
-<div id="bullyingModal">
-  <button id="closeModalBtn">&times;</button>
-  <h2 class="text-xl font-bold mb-4">No Más Bullying</h2>
-  <p class="mb-4">
-    El bullying es un comportamiento agresivo e intencional que se repite en el tiempo, causando daño físico o emocional. 
-    Es responsabilidad de todos tomar medidas para prevenirlo y erradicarlo.
-  </p>
-  <p class="mb-4">
-    Al firmar el pacto, te comprometes a:
-  </p>
-  <ul class="list-disc list-inside mb-4">
-    <li>Respetar y apoyar a tus compañeros.</li>
-    <li>No participar en actos de acoso ni permitir que otros lo hagan.</li>
-    <li>Ser un ejemplo de convivencia pacífica.</li>
-    <li>Denunciar cualquier acto de bullying que presencies.</li>
-  </ul>
-  <p class="mb-4">
-    Únete a nosotros para construir un ambiente más seguro y respetuoso para todos.
-  </p>
-  <button id="signPactBtn" class="bg-orange-500 hover:bg-orange-700 text-white px-4 py-2 rounded">
-    Firmar el Pacto
-  </button>
-</div>
-
-<script>
-  // Elementos del DOM
-  const bullyingBtn = document.getElementById('bullyingBtn');
-  const bullyingModal = document.getElementById('bullyingModal');
-  const modalOverlay = document.getElementById('modalOverlay');
-  const closeModalBtn = document.getElementById('closeModalBtn');
-  const signPactBtn = document.getElementById('signPactBtn');
-
-  // Mostrar el pop-up
-  bullyingBtn.addEventListener('click', () => {
-    bullyingModal.style.display = 'block';
-    modalOverlay.style.display = 'block';
-  });
-
-  // Cerrar el pop-up
-  closeModalBtn.addEventListener('click', () => {
-    bullyingModal.style.display = 'none';
-    modalOverlay.style.display = 'none';
-  });
-
-  modalOverlay.addEventListener('click', () => {
-    bullyingModal.style.display = 'none';
-    modalOverlay.style.display = 'none';
-  });
-
-  // Redirigir al enlace para firmar el pacto
-  signPactBtn.addEventListener('click', () => {
-    window.location.href = 'https://estacionkusmedios.org/nomasbullying';
-  });
-</script>
+  <div id="modalOverlay"></div>
+  <div id="bullyingModal">
+    <button id="closeModalBtn">&times;</button>
+    <h2 class="text-xl font-bold mb-4">No Más Bullying</h2>
+    <p class="mb-4">
+      El bullying es un comportamiento agresivo e intencional que se repite en el tiempo, causando daño físico o emocional. 
+      Es responsabilidad de todos tomar medidas para prevenirlo y erradicarlo.
+    </p>
+    <p class="mb-4">
+      Al firmar el pacto, te comprometes a:
+    </p>
+    <ul class="list-disc list-inside mb-4">
+      <li>Respetar y apoyar a tus compañeros.</li>
+      <li>No participar en actos de acoso ni permitir que otros lo hagan.</li>
+      <li>Ser un ejemplo de convivencia pacífica.</li>
+      <li>Denunciar cualquier acto de bullying que presencies.</li>
+    </ul>
+    <p class="mb-4">
+      Únete a nosotros para construir un ambiente más seguro y respetuoso para todos.
+    </p>
+    <button id="signPactBtn" class="bg-orange-500 hover:bg-orange-700 text-white px-4 py-2 rounded">
+      Firmar el Pacto
+    </button>
+  </div>
 
   <div class="mt-2 mb-6">
     <img src="https://i.ibb.co/mhw9LGh/DJ-WILMER-PNG-ORIGINAL.png" alt="Logo Radio" class="w-80 h-80 object-contain rounded-full shadow-lg">
@@ -146,6 +115,15 @@
   <div class="text-center mb-4">
     <h3 id="songTitle" class="text-xl font-semibold mb-2"></h3>
     <p id="songArtist" class="text-lg mb-6"></p>
+  </div>
+
+  <!-- Control de volumen -->
+  <div class="w-11/12 mb-6">
+    <label for="volumeSlider" class="block text-center mb-2">Volumen</label>
+    <div class="flex justify-between items-center">
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" class="w-full accent-[#FFA447] h-8" value="1">
+      <span id="volumeLabel" class="ml-4 text-lg">100%</span>
+    </div>
   </div>
 
   <button id="playBtn" class="w-16 h-16 bg-[#FFA447] hover:bg-[#FFA447] text-white rounded-full shadow-lg text-2xl flex items-center justify-center focus:outline-none transition-all">
@@ -167,6 +145,7 @@
     const bullyingModal = document.getElementById('bullyingModal');
     const modalOverlay = document.getElementById('modalOverlay');
     const closeModalBtn = document.getElementById('closeModalBtn');
+    const signPactBtn = document.getElementById('signPactBtn');
 
     bullyingBtn.addEventListener('click', () => {
       bullyingModal.style.display = 'block';
@@ -183,9 +162,17 @@
       modalOverlay.style.display = 'none';
     });
 
+    signPactBtn.addEventListener('click', () => {
+      window.location.href = 'https://estacionkusmedios.org/nomasbullying';
+    });
+
     // Botón de reproducción
     const audio = document.getElementById('audio');
     const playBtn = document.getElementById('playBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeLabel = document.getElementById('volumeLabel');
+
+    audio.volume = 1; // Inicializar al 100%
 
     playBtn.addEventListener('click', () => {
       if (audio.paused) {
@@ -217,6 +204,13 @@
 
     setInterval(fetchMetadata, 5000);
     fetchMetadata();
+
+    // Control de volumen
+    volumeSlider.addEventListener('input', () => {
+      const volume = parseFloat(volumeSlider.value);
+      audio.volume = volume;
+      volumeLabel.textContent = `${Math.round(volume * 100)}%`;
+    });
   </script>
 </body>
 
