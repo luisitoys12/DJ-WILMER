@@ -68,6 +68,15 @@
     <a href="https://web.facebook.com/DJCHOCHOBARWILMER" target="_blank" class="flex items-center space-x-2 text-white bg-[#1877F2] hover:bg-[#145dbf] px-4 py-2 rounded btn-effect">
       <i class="fab fa-facebook"></i><span>Facebook</span>
     </a>
+    <a href="https://tusitioweb.com" target="_blank" class="flex items-center space-x-2 text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded">
+      <i class="fas fa-link"></i><span>Sitio Web</span>
+    </a>
+    <a href="https://linkbio.com" target="_blank" class="flex items-center space-x-2 text-white bg-green-500 hover:bg-green-700 px-4 py-2 rounded">
+      <i class="fas fa-link"></i><span>Linkbio</span>
+    </a>
+    <a href="https://vacantes.com" target="_blank" class="flex items-center space-x-2 text-white bg-orange-500 hover:bg-orange-700 px-4 py-2 rounded">
+      <i class="fas fa-briefcase"></i><span>Vacantes</span>
+    </a>
     <!-- Botón para mostrar el pop-up de Bullying -->
     <button id="bullyingBtn" class="flex items-center space-x-2 text-white bg-red-500 hover:bg-red-700 px-4 py-2 rounded">
       <i class="fas fa-exclamation-circle"></i><span>No Más Bullying</span>
@@ -136,6 +145,7 @@
     // Botón de reproducción
     const audio = document.getElementById('audio');
     const playBtn = document.getElementById('playBtn');
+
     playBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play();
@@ -145,6 +155,27 @@
         playBtn.innerHTML = '<i class="fas fa-play"></i>';
       }
     });
+
+    // Obtener metadatos de la canción desde Zeno
+    const songTitle = document.getElementById('songTitle');
+    const songArtist = document.getElementById('songArtist');
+
+    async function fetchMetadata() {
+      try {
+        const response = await fetch(`https://zenoplay.zenomedia.com/api/zenofm/nowplaying/wttrxavefwzuv?ra=${Math.random()}`);
+        const data = await response.json();
+        if (data.title) {
+          const [artist, song] = data.title.split(' - ');
+          songTitle.textContent = song || "Sin título";
+          songArtist.textContent = artist || "Desconocido";
+        }
+      } catch (error) {
+        console.error('Error al obtener metadatos:', error);
+      }
+    }
+
+    setInterval(fetchMetadata, 5000);
+    fetchMetadata();
   </script>
 </body>
 
