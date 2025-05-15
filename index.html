@@ -212,14 +212,51 @@
       volumeLabel.textContent = `${Math.round(volume * 100)}%`;
     });
   </script>
-<!-- Footer -->
-  <footer class="w-full bg-gray-800 text-white text-center py-4 mt-10">
-    <p class="text-sm">
-      Diseño por DJWILMER | Modificaciones por Estación Kus Medios
-    </p>
-    <p class="text-xs mt-2">
-      Se añadió: Pop-up con campaña No Más Bullying, control de volumen corregido, metadatos desde ZenoFM, título mediano "PRÓXIMAMENTE", historial de temas escuchados, botón de peticiones y modificación para uso con panel SonicPanel y AzuraCast.
-    </p>
-  </footer>
+<!-- Footer con botón para mostrar novedades -->
+<footer class="w-full bg-gray-800 text-white text-center py-4 mt-10">
+  <p class="text-sm">
+    Diseño por <span class="font-bold">DJWILMER</span> | Modificaciones por <span class="font-bold">Estación Kus Medios</span>
+  </p>
+  <button id="footerPopupBtn" class="mt-2 bg-orange-500 hover:bg-orange-700 text-white px-4 py-2 rounded">
+    Conoce las novedades
+  </button>
+</footer>
+
+<!-- Pop-Up Modal de Novedades -->
+<div id="footerPopupModal" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center hidden">
+  <div class="bg-white text-black p-6 rounded-lg shadow-lg relative">
+    <button id="closeFooterPopup" class="absolute top-2 right-2 text-xl text-gray-600 hover:text-black">&times;</button>
+    <h2 class="text-xl font-bold mb-4">Novedades</h2>
+    <ul class="list-disc list-inside text-sm">
+      <li>Control de volumen corregido</li>
+      <li>Campaña <span class="font-bold">No Más Bullying</span></li>
+      <li>Integración de metadatos desde ZenoFM</li>
+      <li>Historial de temas escuchados</li>
+      <li>Botón de peticiones</li>
+      <li>Modificación para uso con panel SonicPanel y AzuraCast</li>
+    </ul>
+  </div>
+  // diseño javascript footer
+  <script>
+  // Abrir y cerrar el modal de novedades
+  const footerPopupBtn = document.getElementById('footerPopupBtn');
+  const footerPopupModal = document.getElementById('footerPopupModal');
+  const closeFooterPopup = document.getElementById('closeFooterPopup');
+
+  footerPopupBtn.addEventListener('click', () => {
+    footerPopupModal.classList.remove('hidden');
+  });
+
+  closeFooterPopup.addEventListener('click', () => {
+    footerPopupModal.classList.add('hidden');
+  });
+
+  footerPopupModal.addEventListener('click', (e) => {
+    if (e.target === footerPopupModal) {
+      footerPopupModal.classList.add('hidden');
+    }
+  });
+</script>
+</div>
 </body>
 </html>
