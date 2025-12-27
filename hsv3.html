@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUSFM | 2026 Orbital Edition</title>
+    <!-- Bootstrap 5.3 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;900&family=JetBrains+Mono&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --neon-cyan: #00f2ff;
+            --neon-gold: #ffd700;
+            --neon-purple: #b026ff;
+            --glass-bg: rgba(10, 10, 15, 0.9);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #050508;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(176, 38, 255, 0.05) 0%, transparent 50%),
+                url('https://www.transparenttextures.com/patterns/dark-matter.png');
+        }
+
+        /* --- ESTÉTICA AÑO NUEVO 2026 --- */
+        .ny-2026-badge {
+            background: linear-gradient(90deg, var(--neon-gold), #fff, var(--neon-gold));
+            background-size: 200% auto;
+            color: #000;
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        /* --- V3 ORBITAL COMMAND BAR --- */
+        .orbital-bar {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1100px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px; /* Diseño Orbital / Cápsula */
+            padding: 12px 35px;
+            z-index: 9999;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8), inset 0 0 20px rgba(0, 242, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .orbital-bar:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 20px 80px rgba(0, 242, 255, 0.15);
+        }
+
+        /* Avatar Frames (Cuadrados con Glow) */
+        .meta-box {
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #000;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .meta-box.gold-frame { border-color: var(--neon-gold); box-shadow: 0 0 10px rgba(255, 215, 0, 0.2); }
+
+        /* --- VISUALIZER --- */
+        .v-container { display: flex; align-items: end; gap: 2px; height: 20px; opacity: 0.4; }
+        .v-bar { width: 3px; background: var(--neon-cyan); border-radius: 2px; }
+
+        /* --- CARDS & MODALS --- */
+        .news-card-v3 {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 30px;
+            transition: 0.3s;
+            overflow: hidden;
+        }
+        .news-card-v3:hover {
+            transform: scale(1.02);
+            border-color: var(--neon-purple);
+            background: rgba(176, 38, 255, 0.05);
+        }
+
+        .modal-crystal {
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(40px);
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .orbital-bar { border-radius: 35px; padding: 10px 20px; bottom: 10px; }
+            .hide-mobile { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ADORNO 2026: COUNTDOWN BAR -->
+    <div class="w-full bg-black/50 border-b border-white/5 py-2 px-4 flex justify-center items-center gap-4 text-[10px] font-bold tracking-[0.3em] uppercase">
+        <span class="text-slate-500">Temporada</span>
+        <div class="ny-2026-badge">NEW YEAR 2026</div>
+        <span class="text-cyan-400" id="countdown">Iniciando Ciclo...</span>
+    </div>
+
+    <!-- MAIN INTERFACE -->
+    <main class="container py-20 pb-40">
+        
+        <!-- SECCIÓN NOTICIAS -->
+        <section class="mb-24">
+            <h2 class="text-center font-black text-5xl mb-12 italic tracking-tighter">SPEED <span class="text-cyan-400">NEWS</span></h2>
+            <div class="row g-4" id="news-grid">
+                <!-- Generado por JS para el sistema de pop-up -->
+            </div>
+        </section>
+
+        <!-- SECCIÓN EQUIPO -->
+        <section id="equipo" class="mb-24">
+            <h3 class="text-center font-bold text-xs text-slate-500 tracking-[0.5em] uppercase mb-4">Elite Staff</h3>
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="text-center group">
+                    <div class="meta-box w-24 h-24 mb-3 gold-frame mx-auto">
+                        <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=EstacionKusFM&direction=2&head_direction=2&gesture=std&size=l" class="mt-4 scale-150">
+                    </div>
+                    <span class="block font-bold text-sm">KUSFM</span>
+                    <small class="text-[9px] text-slate-500 uppercase">Director</small>
+                </div>
+                <div class="text-center group">
+                    <div class="meta-box w-24 h-24 mb-3 mx-auto border-white/10">
+                        <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=Speed2026&direction=2&head_direction=2&gesture=std&size=l" class="mt-4 scale-150">
+                    </div>
+                    <span class="block font-bold text-sm">SpeedDJ</span>
+                    <small class="text-[9px] text-slate-500 uppercase">Moderador</small>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- V3 ORBITAL COMMAND BAR (15+ FUNCIONES) -->
+    <div class="orbital-bar">
+        <div class="flex items-center justify-between gap-6">
+            
+            <!-- INFO & METADATA -->
+            <div class="flex items-center gap-4 flex-1 min-w-0">
+                <div class="flex gap-2">
+                    <!-- Función 1: Cover Art -->
+                    <div class="meta-box shadow-2xl">
+                        <img id="cover-art" src="https://demo.azuracast.com/static/img/generic_song.jpg" class="w-full h-full object-cover">
+                    </div>
+                    <!-- Función 2: DJ Avatar sync (Cuadrado retro) -->
+                    <div class="meta-box gold-frame shadow-2xl hide-mobile">
+                        <img id="dj-head" src="https://www.habbo.es/habbo-imaging/avatarimage?user=estacionkusfm&headonly=1&size=l" class="w-10 h-10 mt-1 object-contain">
+                    </div>
+                </div>
+                <div class="min-w-0">
+                    <div class="flex items-center gap-2 mb-0.5">
+                        <span id="signal-pulse" class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
+                        <span id="dj-name" class="text-mono text-[9px] text-cyan-400 font-bold uppercase">DJ: KUSFM</span>
+                    </div>
+                    <!-- Función 3: Marquee Dynamic -->
+                    <h4 id="track-name" class="text-white font-bold text-sm md:text-base truncate tracking-tight">Cargando Estación...</h4>
+                    <!-- Función 4: Spectrum Visualizer -->
+                    <div class="v-container" id="visualizer"></div>
+                </div>
+            </div>
+
+            <!-- CENTRAL CONTROLS -->
+            <div class="flex items-center gap-3">
+                <!-- Función 5: Reload Buffer -->
+                <button id="btn-reload" class="p-2 text-slate-600 hover:text-white transition-colors hide-mobile">
+                    <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                </button>
+                <!-- Función 6: Elite Play Engine -->
+                <button id="btn-play" class="w-12 h-12 md:w-14 md:h-14 bg-white text-black rounded-full flex items-center justify-center hover:scale-110 active:scale-90 transition-all shadow-xl">
+                    <i data-lucide="play" id="play-icon" class="fill-current w-6 h-6 ml-1"></i>
+                </button>
+            </div>
+
+            <!-- INTERACTION HUB -->
+            <div class="flex items-center justify-end gap-5 flex-1">
+                <!-- Función 7: Real-time Listeners -->
+                <div class="hide-mobile flex flex-col items-end border-r border-white/10 pr-5">
+                    <span class="text-[8px] font-black text-slate-500 uppercase tracking-widest">Listeners</span>
+                    <span id="listeners-count" class="text-mono text-xs font-bold text-white">00</span>
+                </div>
+                <!-- Función 8: Request Step-Modal -->
+                <button onclick="openModal('request-modal')" class="w-11 h-11 bg-cyan-500 text-black rounded-full flex items-center justify-center hover:bg-white transition-all shadow-lg shadow-cyan-500/20">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                </button>
+                <!-- Función 9: Volume Slider -->
+                <div class="hide-mobile flex items-center gap-2">
+                    <i data-lucide="volume-2" class="w-4 h-4 text-slate-500"></i>
+                    <input type="range" id="vol-slider" min="0" max="1" step="0.01" value="0.7" class="w-16 cursor-pointer">
+                </div>
+                <!-- Función 10: History Button -->
+                <button onclick="openModal('history-modal')" class="p-2 text-slate-600 hover:text-white">
+                    <i data-lucide="history" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALES SISTEMAS (NEWS & FORMS) -->
+    
+    <!-- Modal Noticias (Popup Función 11) -->
+    <div class="modal fade" id="newsPopup" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-crystal">
+                <div class="modal-body p-8">
+                    <div class="flex justify-between items-start mb-6">
+                        <div id="news-pop-tag" class="bg-cyan-500/10 text-cyan-400 px-3 py-1 rounded-full text-[10px] font-bold uppercase">Categoría</div>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <img id="news-pop-img" src="" class="w-full h-48 object-cover rounded-3xl mb-6 border border-white/10">
+                    <h2 id="news-pop-title" class="text-3xl font-black mb-4 italic tracking-tighter">Título de Noticia</h2>
+                    <p id="news-pop-content" class="text-slate-400 leading-relaxed mb-6"></p>
+                    <div class="flex items-center gap-3 border-t border-white/5 pt-6">
+                        <img src="https://www.habbo.es/habbo-imaging/avatarimage?user=KUSFM&headonly=1" class="w-8 h-8 rounded-full bg-slate-800">
+                        <span class="text-xs font-bold text-slate-500">Escrito por: <span class="text-white">Admin Speed</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Peticiones (Función 12) -->
+    <div class="modal fade" id="requestModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-crystal p-10">
+                <div id="req-step-1" class="space-y-4">
+                    <h3 class="text-2xl font-black italic mb-6">CENTRO DE <span class="text-cyan-400">CABINA</span></h3>
+                    <button onclick="startReq('Grito')" class="w-full flex justify-between p-4 bg-white/5 rounded-3xl border border-white/5 hover:border-cyan-500 transition-all text-left">
+                        <span>Mandar Grito</span> <i data-lucide="megaphone" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="startReq('Canción')" class="w-full flex justify-between p-4 bg-white/5 rounded-3xl border border-white/5 hover:border-yellow-500 transition-all text-left">
+                        <span>Pedir Canción</span> <i data-lucide="music" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="startReq('Declaración')" class="w-full flex justify-between p-4 bg-white/5 rounded-3xl border border-white/5 hover:border-pink-500 transition-all text-left">
+                        <span>Declaración</span> <i data-lucide="heart" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                <div id="req-step-2" class="hidden space-y-4">
+                    <button onclick="showStep(1)" class="text-xs text-cyan-400 font-bold uppercase"><i data-lucide="arrow-left" class="w-3 h-3 inline"></i> Volver</button>
+                    <div id="req-fields"></div>
+                    <button onclick="finishReq()" class="w-full bg-cyan-500 text-black py-4 rounded-3xl font-black text-xl shadow-xl">ENVIAR AHORA</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Historial (Función 13) -->
+    <div class="modal fade" id="historyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content modal-crystal p-6">
+                <h4 class="font-black italic mb-4">RECIENTES</h4>
+                <div id="history-list" class="space-y-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio-engine" crossorigin="anonymous"></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // CONFIG & DATA
+        const API = "https://demo.azuracast.com/api/nowplaying/1";
+        const STREAM = "https://demo.azuracast.com/radio/8000/radio.mp3";
+        
+        const newsData = [
+            { id: 1, tag: 'Evento', title: 'Pixel Party 2026', desc: 'Iniciamos el año con la fiesta más grande del hotel. Habrá premios y placas exclusivas.', img: 'https://images.habbo.com/c_images/article_images_hq/article_summer_games_2023.png' },
+            { id: 2, tag: 'Sorteo', title: 'Mega Raro de Enero', desc: 'Participa por un Sofá Club clásico enviando tus peticiones por la web oficial.', img: 'https://images.habbo.com/c_images/article_images_hq/article_rare_furniture.png' },
+            { id: 3, tag: 'Técnico', title: 'Update V3 Orbital', desc: 'Hemos desplegado la nueva interfaz orbital con visualizador de espectro real.', img: 'https://images.habbo.com/c_images/article_images_hq/article_retro_tech.png' }
+        ];
+
+        const audio = document.getElementById('audio-engine');
+        const playBtn = document.getElementById('btn-play');
+        const playIcon = document.getElementById('play-icon');
+        const visualizer = document.getElementById('visualizer');
+        
+        let isPlaying = false;
+        let audioCtx, analyser, source;
+
+        // Función 14: Visualizador
+        for(let i=0; i<15; i++) {
+            const b = document.createElement('div');
+            b.className = 'v-bar';
+            b.style.height = '4px';
+            visualizer.appendChild(b);
+        }
+
+        // --- SISTEMA DE NOTICIAS POPUP ---
+        function renderNews() {
+            const grid = document.getElementById('news-grid');
+            grid.innerHTML = newsData.map(n => `
+                <div class="col-md-4">
+                    <div class="news-card-v3 p-4">
+                        <img src="${n.img}" class="w-full h-40 object-cover rounded-2xl mb-4">
+                        <span class="text-[9px] font-black text-cyan-400 tracking-widest uppercase">${n.tag}</span>
+                        <h4 class="font-bold text-lg mb-4">${n.title}</h4>
+                        <button onclick="showNews(${n.id})" class="w-full py-3 bg-white/5 rounded-2xl text-xs font-bold hover:bg-cyan-500 hover:text-black transition-all">Ver Más</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showNews(id) {
+            const n = newsData.find(x => x.id === id);
+            document.getElementById('news-pop-tag').innerText = n.tag;
+            document.getElementById('news-pop-img').src = n.img;
+            document.getElementById('news-pop-title').innerText = n.title;
+            document.getElementById('news-pop-content').innerText = n.desc;
+            new bootstrap.Modal(document.getElementById('newsPopup')).show();
+        }
+
+        // --- AZURACAST CORE ---
+        async function fetchNowPlaying() {
+            try {
+                const res = await fetch(API);
+                const data = await res.json();
+                
+                document.getElementById('track-name').innerText = `${data.now_playing.song.title} - ${data.now_playing.song.artist}`;
+                document.getElementById('cover-art').src = data.now_playing.song.art;
+                
+                const dj = data.live.is_live ? data.live.streamer_name : "estacionkusfm";
+                document.getElementById('dj-name').innerText = `DJ: ${dj.toUpperCase()}`;
+                document.getElementById('dj-head').src = `https://www.habbo.es/habbo-imaging/avatarimage?user=${encodeURIComponent(dj)}&headonly=1&size=l`;
+                
+                document.getElementById('listeners-count').innerText = data.listeners.current.toString().padStart(2, '0');
+                
+                // Función 15: Historial Recientes
+                document.getElementById('history-list').innerHTML = data.song_history.slice(0, 5).map(h => `
+                    <div class="flex items-center gap-3 p-2 bg-white/5 rounded-xl text-[11px]">
+                        <img src="${h.song.art}" class="w-8 h-8 rounded-lg">
+                        <div class="truncate"><b>${h.song.title}</b><br><span class="opacity-50">${h.song.artist}</span></div>
+                    </div>
+                `).join('');
+
+                // Título dinámico
+                document.title = `KUSFM | ${data.now_playing.song.title}`;
+            } catch (e) { console.warn("API Error"); }
+        }
+
+        // AUDIO ENGINE
+        function initAudio() {
+            if (audioCtx) return;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioCtx.createAnalyser();
+            source = audioCtx.createMediaElementSource(audio);
+            source.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            analyser.fftSize = 64;
+            draw();
+        }
+
+        function draw() {
+            requestAnimationFrame(draw);
+            const dataArray = new Uint8Array(analyser.frequencyBinCount);
+            analyser.getByteFrequencyData(dataArray);
+            const bars = document.querySelectorAll('.v-bar');
+            bars.forEach((bar, i) => {
+                const h = Math.max(2, (dataArray[i % dataArray.length] / 255) * 18);
+                bar.style.height = `${h}px`;
+                bar.style.opacity = 0.2 + (dataArray[i % dataArray.length] / 255);
+            });
+        }
+
+        playBtn.onclick = () => {
+            initAudio();
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            if(!isPlaying) {
+                audio.src = STREAM + "?t=" + Date.now();
+                audio.play();
+                playIcon.setAttribute('data-lucide', 'pause');
+                isPlaying = true;
+            } else {
+                audio.pause();
+                audio.src = "";
+                playIcon.setAttribute('data-lucide', 'play');
+                isPlaying = false;
+            }
+            lucide.createIcons();
+        };
+
+        document.getElementById('btn-reload').onclick = () => {
+            if(isPlaying) {
+                audio.pause();
+                audio.src = STREAM + "?t=" + Date.now();
+                audio.load();
+                audio.play();
+            }
+        };
+
+        document.getElementById('vol-slider').oninput = (e) => { audio.volume = e.target.value; };
+
+        // MODAL HELPERS
+        window.openModal = (id) => new bootstrap.Modal(document.getElementById(id)).show();
+
+        window.startReq = (type) => {
+            document.getElementById('req-step-1').classList.add('hidden');
+            document.getElementById('req-step-2').classList.remove('hidden');
+            const fields = document.getElementById('req-fields');
+            fields.innerHTML = `
+                <div class="bg-cyan-500/10 p-4 rounded-3xl border border-cyan-500/20 text-center text-[10px] font-black uppercase text-cyan-400 mb-4">${type}</div>
+                <input type="text" placeholder="Tu Habbo Nombre" class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-cyan-500">
+                <textarea placeholder="Mensaje..." class="w-full bg-white/5 border border-white/10 p-4 rounded-2xl outline-none focus:border-cyan-500 h-24 mt-4"></textarea>
+            `;
+            lucide.createIcons();
+        }
+
+        window.showStep = (n) => {
+            document.getElementById('req-step-1').classList.toggle('hidden', n !== 1);
+            document.getElementById('req-step-2').classList.toggle('hidden', n !== 2);
+        }
+
+        window.finishReq = () => {
+            alert("¡Señal enviada a cabina! El DJ la revisará pronto.");
+            bootstrap.Modal.getInstance(document.getElementById('requestModal')).hide();
+        }
+
+        // COUNTDOWN 2026
+        function updateCountdown() {
+            const target = new Date("Jan 1, 2026 00:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = target - now;
+            
+            if (diff < 0) {
+                document.getElementById('countdown').innerText = "¡FELIZ 2026!";
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('countdown').innerText = `${d}D ${h}H ${m}M ${s}S PARA EL CIERRE`;
+        }
+
+        // INIT
+        renderNews();
+        fetchNowPlaying();
+        setInterval(fetchNowPlaying, 15000);
+        setInterval(updateCountdown, 1000);
+        lucide.createIcons();
+    </script>
+</body>
+</html>
